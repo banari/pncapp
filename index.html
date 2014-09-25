@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Peaches And Cream Shop</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" href="js/idangerous.swiper.css">
+<link rel="stylesheet" href="js/idangerous.swiper.3dflow.css">
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/appstore.css">
+<link rel="stylesheet" href="js/jquery.mobile-1.4.3.min.css" />
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="config.js"></script>
+<script src="js/jquery.mobile-1.4.3.min.js"></script>
+<script src="js/idangerous.swiper.min.js"></script>
+<script src="js/idangerous.swiper.3dflow.min.js"></script>
+<script src="main.js"></script>	
+</head>
+
+<body>
+
+	<div id="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+		<a id="leftheader" href="" data-icon="carat-l"  data-rel="back">Vissza</a>
+		<h1><img src="img/logo.png" id="logo"></h1>
+		<a id="rightheader" href="#categorypage" class="ui-btn-right" data-transition="slideup" >Kategóriák</a>
+		
+	</div>
+
+<div data-role="page" id="intropage">
+	
+	<div data-role="content" id="introContent">
+		<p id="introContentNoFeeds">
+			Welcome to the Shop. <br> <img src="img/loader.gif">
+		</p>
+            <div id="mainslider" class="swiper-container featured plain">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"></div>
+                </div>
+            </div>
+		<div id="catswiper" class="swiper-container banners-container border-gradient">
+			<div class="thumbs-title">Böngészés kategóriánként</div>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/1.jpg)"></div>
+				</div>
+			</div>
+		</div>
+		<div id="saleslider" class="swiper-container thumbs-cotnainer border-gradient">
+			<div class="thumbs-title"></div>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="" height="150" width="150" alt="">
+					<div class="app-title"></div>
+					<div class="app-category"></div>
+					<div class="app-price"></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="newslider" class="swiper-container thumbs-cotnainer border-gradient">
+			<div class="thumbs-title"></div>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="" height="150" width="150" alt="">
+					<div class="app-title"></div>
+					<div class="app-category"></div>
+					<div class="app-price"></div>
+				</div>
+			</div>
+		</div>
+		<div class="swiper-container banners-container border-gradient">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/1.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/2.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/3.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/4.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/5.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/6.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/7.jpg)"></div>
+				</div>
+			</div>
+		</div>		
+		<div id="totalslider" class="swiper-container thumbs-cotnainer border-gradient">
+			<div class="thumbs-title"></div>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="" height="150" width="150" alt="">
+					<div class="app-title"></div>
+					<div class="app-category"></div>
+					<div class="app-price"></div>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+
+</div>
+	
+
+<div data-role="page" id="cartpage">
+	<div data-role="content">
+		<ul id="inCartList" data-role="listview" data-inset="false" data-split-icon="delete">
+		</ul>
+		<div data-role="popup" id="firstPopup" data-dismissible="false" class="ui-content">
+	    	<p>Biztosan üríted a kosarad?</p>
+	    	<a href="" id="confirmempty" data-rel="back" data-role="button">Igen</a>
+	    	<a href="" data-rel="back" data-role="button">Nem</a>
+		</div>
+		<!--<div data-role="popup" id="proddelpopup" data-dismissible="false" class="ui-content">
+	    	<p>Biztosan törlöd?</p>
+	    	<a href="" id="confirmproddel" data-rel="back" data-role="button">Igen</a>
+	    	<a href="" data-rel="back" data-role="button">Nem</a>
+		</div> -->
+	</div>
+</div>
+<div data-role="page" id="orderpage">
+	<div data-role="content">
+		<form >
+		<ul id="orderList" data-role="listview" data-inset="false" >
+			<li data-role='list-divider'>Adatok</li>
+			<li class="ui-field-contain">
+				<label for="fullname">Teljes név:</label>
+				<input type="text" name="fullname" id="fullname" value="" placeholder="Teljes név">
+			</li>
+			<li class="ui-field-contain">
+				<label for="email">Email:</label>
+				<input type="text" name="email" id="email" value="" placeholder="Email">
+			</li>
+			<li class="ui-field-contain">
+				<label for="telefon">Telefon:</label>
+				<input type="tel" name="telefon" id="telefon" value="" placeholder="Telefon">
+			</li>
+			<li data-role='list-divider'>Szállítási adatok</li>
+			<li class="ui-field-contain">
+				<label for="country">Ország:</label>
+				<input type="text" name="country" id="country" value="" placeholder="Ország">
+			</li>
+			<li class="ui-field-contain">
+				<label for="city">Város:</label>
+				<input type="text" name="city" id="city" value="" placeholder="Város">
+			</li>
+			<li class="ui-field-contain">
+				<label for="zip">Irányítószám:</label>
+				<input type="text" name="zip" id="zip" value="" placeholder="Irányítószám">
+			</li>
+			<li class="ui-field-contain">
+				<label for="street">Utca, házszám:</label>
+				<input type="text" name="street" id="street" value="" placeholder="Utca, házszám">
+			</li>												
+			<li data-role='list-divider'>Fizetési adatok</li>
+			<li>
+<label for="paymethod" class="select">Fizetés módja:</label>
+<select name="paymethod" id="paymethod">
+    <option value="banktransfer">Bank Transfer</option>
+    <option value="paypal">PayPal</option>
+    <option value="cashondelivery">Cash on delivery</option>
+</select>
+			</li>
+<li><a href="#orderpopup" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop">Rendelés leadása</a> </li>
+
+		</ul>
+		</form>
+<div data-role="popup" id="orderpopup" data-overlay-theme="a" data-theme="a" data-dismissible="false" class="ui-corner-all">
+    <div data-role="header" data-theme="a" class="ui-corner-top">
+        <h1>Megerősítés</h1>
+    </div>
+    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+        <h3 class="ui-title">Tényleg leadja a rendelését?</h3>
+        <a id="orderbtn" href="#" data-role="button"  data-rel="back" >Igen</a>
+        <a href="#" data-role="button" data-rel="back" >Nem</a>
+    </div>
+</div>		
+	</div>
+</div>
+
+<div data-role="page" id="searchpage">
+	<div data-role="content">
+		<ul id="search" data-role="listview" data-inset="false" ></ul>
+	</div>	
+</div>
+
+<div data-role="page" id="categorypage" >
+	<div data-role="content" id="categorycontent">
+		<ul id="catList" data-role="listview" data-inset="false" ></ul>
+	</div>
+</div>
+
+<div id="footer" data-role="footer" data-position="fixed" data-id="footernav" data-tap-toggle="false"> 
+     <div data-role="navbar">
+       <ul>
+         <li><a id="homenavbtn" class="intro ui-btn-active ui-state-persist" href="#intropage" data-transition="none" data-icon="home" data-iconpos="top">Home</a></li>
+         <li><a id="cartnavbtn" class="cart" href="#cartpage" data-transition="none" data-icon="shop" data-iconpos="shop">Kosár <span id="cartnumber" class="ui-li-count">0</span></a></li>
+         <li><a id="searchnavbtn" class="search" href="#searchpage" data-transition="none" data-icon="search" data-iconpos="top">Keresés</a></li>
+       </ul>
+     </div>
+   	</div>
+
+<script>
+$(document).on("pagecreate", "#intropage", function(e) {
+	init();	
+});
+</script>
+<script type="text/javascript">
+$(function(){
+			$( "[data-role='header'], [data-role='footer']" ).toolbar({ theme: "a" });
+
+$("#footer .ui-navbar a").on("click", function(){
+	var active = $(this);
+	$("#footer .ui-navbar a").removeClass("nav-btn-active");
+	active.addClass("nav-btn-active");
+	console.log("hm: " + active.attr("class"));
+});
+		});
+</script>
+
+</body>
+</html>
