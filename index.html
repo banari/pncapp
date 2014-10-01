@@ -131,7 +131,7 @@
 </div>
 <div data-role="page" id="orderpage">
 	<div data-role="content">
-		<form >
+		<form id="orderForm">
 		<ul id="orderList" data-role="listview" data-inset="false" >
 			<li data-role='list-divider'>Adatok</li>
 			<li class="ui-field-contain">
@@ -182,7 +182,7 @@
     </div>
     <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
         <h3 class="ui-title">Tényleg leadja a rendelését?</h3>
-        <a id="orderbtn" href="#" data-role="button"  data-rel="back" >Igen</a>
+        <a id="orderbtn" href="#" data-role="button"   >Igen</a>
         <a href="#" data-role="button" data-rel="back" >Nem</a>
     </div>
 </div>		
@@ -191,7 +191,39 @@
 
 <div data-role="page" id="searchpage">
 	<div data-role="content">
-		<ul id="search" data-role="listview" data-inset="false" ></ul>
+		<form id="searchForm">
+		<ul id="search" data-role="listview" data-inset="false" >
+			<li class="ui-field-contain">
+				<label for="fullname">Név:</label>
+				<input type="text" name="name" id="name" value="" placeholder="Név">
+			</li>
+			<li class="ui-field-contain">
+				<label for="categories">Kategória:</label>
+				<select multiple="multiple" data-native-menu="false" name="categories" id="categories">
+				    
+				</select>				
+			</li>
+			<li class="ui-field-contain">
+				<div id="priceslider" data-role="rangeslider">
+				    <label for="armin">Ár:</label>
+				    <input type="range" name="armin" id="armin" min="0" max="20000" value="0">
+				    <label for="armax">Ár max:</label>
+				    <input type="range" name="armax" id="armax" min="0" max="20000" value="20000">
+				</div>
+			</li>
+			<li data-role='list-divider'></li>
+<li><a href="#searchrespage" data-role="button" data-inline="true">Keresés <span id="resultcount"></span></a> </li>
+
+		</ul>
+		</form>
+	</div>	
+</div>
+
+<div data-role="page" id="searchrespage">
+	<div data-role="content">
+		<ul id="searchreslist" data-role="listview" data-inset="false" >
+		</ul>
+		</form>
 	</div>	
 </div>
 
@@ -224,7 +256,6 @@ $("#footer .ui-navbar a").on("click", function(){
 	var active = $(this);
 	$("#footer .ui-navbar a").removeClass("nav-btn-active");
 	active.addClass("nav-btn-active");
-	console.log("hm: " + active.attr("class"));
 });
 		});
 </script>

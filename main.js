@@ -20,6 +20,10 @@ var total = 0; //total price
 
 var box = {}; // my object
 
+
+//search
+var searchres = [];
+
 var fprod = 0;
 var fcat = 0;
 
@@ -83,7 +87,6 @@ $(document).on("pagecontainershow", function () {
 		getProducts();
         //displayProducts();
     }
-
 });
 
 
@@ -191,8 +194,7 @@ $(document).on("pagecontainershow", function () {
 		$("#prodList").listview("refresh");
 	})
 
-	$(document).on("pagebeforeshow", "#cartpage", function(e){
-		
+	$(document).on("pagebeforeshow", "#cartpage", function(e){	
 		var s = "";
 		total = 0;
 
@@ -219,96 +221,97 @@ $(document).on("pagecontainershow", function () {
 		$("#inCartList").listview("refresh");
 	})
 
+	$(document).on("click", "#cartdel", function(){
+		var cartpos = parseInt($(this).data("position"));
+		//console.log("prod price: " + parseFloat(cart[cartpos]._product.price) + " prod qty: " + parseInt(cart[cartpos]._qty))
+		var prodcost = parseFloat(cart[cartpos]._product.price) * parseInt(cart[cartpos]._qty);
+		cart.splice(cartpos,1);
+		cartCount--;
+		updateBubble();
+		localStorage["cart"] = JSON.stringify(cart);
 
-
-
-	//Listen for the addFeedPage so we can support adding feeds
-	$(document).on("pageshow", "#addfeedpage", function(e) {
-		//console.log('dojngpageshow');
-		$("#addFeedForm").submit(function(e) {
-		//	console.log('handle submit');
-			handleAddFeed();
-			return false;
-		});
-	});
-
-	//Listen for delete operations
-	$(document).on("touchend", ".deleteFeed", function(e) {
-		var delId = $(this).jqmData("feedid");
-		removeFeed(delId);
-	});
-	
-	//Listen for the Feed Page so we can display entries
-	$(document).on("pageshow", "#feedpage",  function(e) {
-		//get the feed id based on query string
-		var query = $(this).data("url").split("=")[1];
-		//remove ?id=
-		query = query.replace("?id=","");
-		//assume it's a valid ID, since this is a mobile app folks won't be messing with the urls, but keep
-		//in mind normally this would be a concern
-		var feeds = getFeeds();
-		var thisFeed = feeds[query];
-		$("h1",this).text(thisFeed.name);
-		if(!feedCache[thisFeed.url]) {
-			$("#feedcontents").html("<p>Fetching data...</p>");
-			//now use Google Feeds API
-			$.get("https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q="+encodeURI(thisFeed.url)+"&callback=?", {}, function(res,code) {
-				//see if the response was good...
-				if(res.responseStatus == 200) {
-					feedCache[thisFeed.url] = res.responseData.feed.entries;
-					displayFeed( thisFeed.url);
-				} else {
-					var error = "<p>Sorry, but this feed could not be loaded:</p><p>"+res.responseDetails+"</p>";
-					$("#feedcontents").html(error);
-				}
-			},"json");
+		$("#inCartList li").eq(cartpos).remove();
+		var newtotal = parseInt($("#thetotal").text()) - prodcost;
+		if (newtotal <= 0){
+			$("#inCartList").html("<li>A kosarad jelenleg üres!</li>");
+			$("#inCartList").listview("refresh");
 		} else {
-			displayFeed(thisFeed.url);
+			$("#thetotal").text(newtotal);	
 		}
-		
 	});
-	
-	//Listen for the Entry Page so we can display an entry
-	$(document).on("pageshow", "#entrypage", function(e) {
-		//get the entry id and url based on query string
-		var query = $(this).data("url").split("?")[1];
-		//remove ?
-		query = query.replace("?","");
-		//split by &
-		var parts = query.split("&");
-		var entryid = parts[0].split("=")[1];
-		var url = parts[1].split("=")[1];
+	$(document).on("click", "#orderbtn", function(){
+			var currentcart;
+			var mincart = [];
+			var theCart;
+
+			for (var i = 0; i< cart.length; ++i){
+				currentcart = {
+					_name : cart[i]._product.title,
+					_prodId : cart[i]._prodId,
+					_qty : cart[i]._qty,
+					_price : cart[i]._product.price,
+					_attrib : cart[i]._attrib.replace("#", ",")
+				}
+				mincart.push(currentcart);
+			}
+				theCart = JSON.stringify(mincart);
+
+				var inputs = $("#orderForm").find("input, select");
+				var serializedData = $("#orderForm").serialize();
+//				console.log("seri: " + serializedData+"&cart="+theCart);
+				var posttext = serializedData+"&cart="+theCart;
+
+				inputs.prop("disabled", true);
+				    request = $.ajax({
+				        url: "http://gate1.hu/ios/post.php",
+				        crossDomain:true,
+				        type: "POST",
+				        data: posttext
+				    });
+	 request.done(function (response, textStatus, jqXHR){
+	        // log a message to the console
+	        //console.log("Hooray, it worked!");
+	    });
+
+	    // callback handler that will be called on failure
+	    request.fail(function (jqXHR, textStatus, errorThrown){
+	        // log the error to the console
+	        console.error(
+	            "The following error occured: "+
+	            textStatus, errorThrown
+	        );
+	    });
+	    request.always(function () {
+	        // reenable the inputs
+	        inputs.prop("disabled", false);
+	        inputs.val("");
+	    });
+	    cart = [];
+	    cartCount = 0;
+	    updateBubble();
+		localStorage["cart"] = JSON.stringify(cart);
+	    // prevent default posting of form
+	    event.preventDefault();
+	    $.mobile.pageContainer.pagecontainer("change", "#cartpage", {
+	    	transition: 'slidedown',
+	    	changeHash: false,
+	    	reserve: true
+	    });			
+	});
+
+
+	$(document).on("pagebeforeshow", "#searchrespage", function(e){
 		
-		var entry = feedCache[url][entryid];
-		$("h1",this).text(entry.title);
-		$("#entrycontents",this).html(entry.content);
-		$("#entrylink",this).attr("href",entry.link);
-	});	
-
-$(document).on("click", "#cartdel", function(){
-	var cartpos = parseInt($(this).data("position"));
-	//console.log("prod price: " + parseFloat(cart[cartpos]._product.price) + " prod qty: " + parseInt(cart[cartpos]._qty))
-	var prodcost = parseFloat(cart[cartpos]._product.price) * parseInt(cart[cartpos]._qty);
-	cart.splice(cartpos,1);
-	cartCount--;
-	updateBubble();
-	localStorage["cart"] = JSON.stringify(cart);
-
-	$("#inCartList li").eq(cartpos).remove();
-	var newtotal = parseInt($("#thetotal").text()) - prodcost;
-	if (newtotal <= 0){
-		$("#inCartList").html("<li>A kosarad jelenleg üres!</li>");
-		$("#inCartList").listview("refresh");
-	} else {
-		$("#thetotal").text(newtotal);	
-	}
-});
-$(document).on("click", "#orderbtn", function(){
-	console.log("rendelés ok");
-	// cart --> url --> php-nak 
-});
-
-
+		var s = "";
+		for(var i=0; i<searchres.length; i++) {
+				s+= "<li><a href='product.html?id="+searchres[i]._id+"' data-prodindex='"+searchres[i]._id+"'><img src='"+ searchres[i]._product.featured_src +"'><h2 class='ui-li-heading'>" +searchres[i]._product.title+"</h2><p class='ui-li-desc'>"+displayPrice(searchres[i]._product.price_html)+" </p></a></li>";				
+		}
+		$("#header h1").html("Keresés eredménye");
+		$("#leftheader").show();
+		$("#rightheader").hide();
+		$("#searchreslist").html(s);
+		$("#searchreslist").listview("refresh");
+	})
 	$(document).on("click", "#addToCartBtn", function(){
 
 		addToCart($(this).data("product"));
@@ -355,7 +358,30 @@ $(document).on("click", "#orderbtn", function(){
 			$("#header h1").html("<img src='img/logo.png' id='logo'>");
 	} );
 
+    	$( "#search input, #search select" ).change(function() {
+		  calculateSearchResult();
+		});
+    	$( "#priceslider" ).on( 'slidestop', function( event ) { 
+  			calculateSearchResult();
+    	});
+
 	$(document).on( "pagebeforeshow", "#searchpage", function( event) {
+
+		var searchcatlist = "<option value=''>Kategóriák:</option>";
+		for(var i=0; i<categories.length; i++) {
+			searchcatlist+= "<option value='"+categories[i].Name+"'>"+categories[i].Name+"</option>";
+		}
+			$("#search #categories").html(searchcatlist);
+			$("#search #categories").selectmenu("refresh");
+
+			if (searchres.length>0){
+				$("#resultcount").text("("+searchres.length+")");
+			} else {
+				$("#resultcount").text("("+products.length+")");	
+			}
+			
+			
+			$("#search").listview("refresh");
 			$("#leftheader").hide();
 			$("#rightheader").hide();
 			$("#header h1").html("Keresés");
@@ -367,7 +393,57 @@ $(document).on("click", "#orderbtn", function(){
 			}
 	});
 }
+	function calculateSearchResult(){
+		searchres = [];
+		var $nev = $("#search #name"),
+			$cat = $("#search #categories"),
+			$armin = $("#search #armin"),
+			$armax = $("#search #armax");
+
+			var catok = true,
+				nameok = true,
+				priceok = true;
 	
+			for (var i = 0; i < products.length; ++i){
+				if ($cat.val()){
+					catok = checkInCat(products[i], $cat.val());
+				}
+				priceok = checkInPrice(products[i], $armin.val(), $armax.val());
+				nameok = checkInName(products[i], $nev.val());
+
+				if (catok && priceok && nameok){
+					addProdToSRes(products[i], i);
+				}
+			} // products for
+			$("#resultcount").text("("+searchres.length+")");
+			$("#search").listview("refresh");
+	}
+	function checkInCat(product, cats){
+		if (cats.length>0){
+			for (var j = 0; j<product.categories.length; ++j){
+				for (var k = 0; k<cats.length; ++k){
+					if (cats[k] == product.categories[j]){
+						return true;
+					}
+				}
+			}	
+		}
+		return false; 
+	};
+
+	function checkInPrice(product, min, max){
+		if ((min <= parseFloat(product.price)) && (parseFloat(product.price) <= max)){
+			return true;
+		};
+		return false;
+	};
+
+	function checkInName(product, name){
+		if (product.title.toLowerCase().indexOf(name.toLowerCase()) >= 0 ){
+			return true;
+		}
+		return false;
+	}
 	function addToCart(sentProduct){
 		var detarray = sentProduct.split("#");
 		var product = products[detarray.shift()]; // the first element is the position of the product in the products array
@@ -406,6 +482,26 @@ $(document).on("click", "#orderbtn", function(){
 		return false;
 	}
 
+function addProdToSRes(product, id){
+	var obj = {
+		_product : product,
+		_id : id
+	}
+	if(searchres.length == 0){
+		searchres.push(obj);
+	} else {
+		var bennevan = 0;
+		for (var i = 0; i < searchres.length; ++i){
+			if(searchres[i]._product.id == product.id){
+				bennevan = 1;
+				break;
+			}
+		}
+		if (bennevan == 0){
+			searchres.push(obj);
+		}
+	}
+}
 	function updateBubble(){
 			if (cartCount>0) {
 				$("#cartnumber").text(cartCount).show();
