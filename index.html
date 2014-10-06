@@ -247,13 +247,6 @@
 	window.addEventListener('load', function() {
 	    FastClick.attach(document.body);
 	}, false);
-	function onDeviceReady() {
-	    if (parseFloat(window.device.version) >= 7.0) {
-	          document.body.style.marginTop = "20px";
-	          document.getElementById("header").style.marginTop = "20px";
-	    }
-	}
-	document.addEventListener('deviceready', onDeviceReady, false);
 	$(document).on("pagecreate", "#intropage", function(e) {
 		init();	
 	});

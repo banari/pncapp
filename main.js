@@ -58,10 +58,10 @@ $(document).on("pagecontainershow", function () {
     var active = $.mobile.pageContainer.pagecontainer("getActivePage");
     activePage = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
     if (activePage == "intropage" && $(".featured", active).hasClass("plain")) {
-
+/*
     	var isAndroid = navigator.userAgent.toLowerCase().indexOf('android')>=0;
 		if (isAndroid) Swiper.prototype.support.transforms3d = false;
-		
+		*/
         mySwiper = $(".featured", active).removeClass("plain").swiper({
             slidesPerView: 'auto',
             centeredSlides: true,
@@ -396,9 +396,23 @@ $(document).on("pagecontainershow", function () {
 			mySwiper.resizeFix(true);
 		}
 	});
-	/*$(document).bind('swipeleft', function () {
-	    history.back();
-	});*/
+
+
+
+	/*
+	 * Fix for footer when the keyboard is displayed
+	 */
+	$(document).on('focus', 'input, textarea, select', function() 
+	{
+		$("#footer").addClass("hidden");
+	});
+
+	$(document).on('blur', 'input, textarea, select', function() 
+	{
+		$("#footer").removeClass("hidden");
+	});
+
+
 }
 	function calculateSearchResult(){
 		searchres = [];

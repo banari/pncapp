@@ -305,7 +305,7 @@ margin-left: -40px;
 html.ui-mobile div.noty{
    display: block;
    opacity: 0.96;
-   top: 0;
+   top: 40%;
    left: 0;
    background-color: #af307e;
    text-align: center;
