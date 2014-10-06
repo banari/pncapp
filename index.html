@@ -244,6 +244,9 @@
 <script type='application/javascript' src="js/idangerous.swiper.3dflow.min.js"></script>
 <script type='application/javascript' src="main.min.js"></script>	
 <script>
+window.addEventListener('load', function() {
+    FastClick.attach(document.body);
+}, false);
 $(document).on("pagecreate", "#intropage", function(e) {
 	init();	
 });
