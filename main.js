@@ -1,8 +1,3 @@
-
-//used for caching
-
-//http://gate1.hu/pnc/json.php
-
 var feedCache= {};
 
 //query all json 
@@ -59,6 +54,10 @@ $(document).on("pagecontainershow", function () {
     var active = $.mobile.pageContainer.pagecontainer("getActivePage");
     activePage = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
     if (activePage == "intropage" && $(".featured", active).hasClass("plain")) {
+
+    	var isAndroid = navigator.userAgent.toLowerCase().indexOf('android')>=0;
+		if (isAndroid) Swiper.prototype.support.transforms3d = false;
+		
         mySwiper = $(".featured", active).removeClass("plain").swiper({
             slidesPerView: 'auto',
             centeredSlides: true,
@@ -91,8 +90,8 @@ $(document).on("pagecontainershow", function () {
 
 
 	$(document).on("pagebeforeshow", "#productpage", function(e) {
-		$("#leftheader").show();
-		$("#rightheader").hide();
+		$("#leftheader").removeClass("hidden");
+		$("#rightheader").addClass("hidden");
 
 		selectedAttributes = [];
 		atrCount = 0;		
@@ -188,8 +187,8 @@ $(document).on("pagecontainershow", function () {
 			};
 		}
 		$("#header h1").html(theCat);
-		$("#leftheader").show();
-		$("#rightheader").hide();
+		$("#leftheader").removeClass("hidden");
+		$("#rightheader").addClass("hidden");
 		$("#prodList").html(s);
 		$("#prodList").listview("refresh");
 	})
@@ -216,8 +215,8 @@ $(document).on("pagecontainershow", function () {
 		}
 
 		$("#header h1").html("Kosár");
-		$("#leftheader").hide();
-		$("#rightheader").hide();
+		$("#leftheader").addClass("hidden");
+		$("#rightheader").addClass("hidden");
 		$("#inCartList").listview("refresh");
 	})
 
@@ -307,8 +306,8 @@ $(document).on("pagecontainershow", function () {
 				s+= "<li><a href='product.html?id="+searchres[i]._id+"' data-prodindex='"+searchres[i]._id+"'><img src='"+ searchres[i]._product.featured_src +"'><h2 class='ui-li-heading'>" +searchres[i]._product.title+"</h2><p class='ui-li-desc'>"+displayPrice(searchres[i]._product.price_html)+" </p></a></li>";				
 		}
 		$("#header h1").html("Keresés eredménye");
-		$("#leftheader").show();
-		$("#rightheader").hide();
+		$("#leftheader").removeClass("hidden");
+		$("#rightheader").addClass("hidden");
 		$("#searchreslist").html(s);
 		$("#searchreslist").listview("refresh");
 	})
@@ -339,22 +338,22 @@ $(document).on("pagecontainershow", function () {
 	});
 
 	$(document).on( "pagebeforeshow", "#categorypage", function( event) {
-		$("#leftheader").show();
-		$("#rightheader").hide();
+		$("#leftheader").removeClass("hidden");
+		$("#rightheader").addClass("hidden");
 		$("#header h1").html("Kategóriák");
 
 	} );
 
 	$(document).on( "pagebeforeshow", "#orderpage", function( event) {
-		$("#leftheader").show();
-		$("#rightheader").hide();
+		$("#leftheader").removeClass("hidden");
+		$("#rightheader").addClass("hidden");
 		$("#header h1").html("Rendelés");
 
 	} );	
 
 	$(document).on( "pagebeforeshow", "#intropage", function( event) {
-			$("#leftheader").hide();
-			$("#rightheader").show();
+			$("#leftheader").addClass("hidden");
+			$("#rightheader").removeClass("hidden");
 			$("#header h1").html("<img src='img/logo.png' id='logo'>");
 	} );
 
@@ -382,8 +381,8 @@ $(document).on("pagecontainershow", function () {
 			
 			
 			$("#search").listview("refresh");
-			$("#leftheader").hide();
-			$("#rightheader").hide();
+			$("#leftheader").addClass("hidden");
+			$("#rightheader").addClass("hidden");
 			$("#header h1").html("Keresés");
 	} );
 
@@ -508,9 +507,9 @@ function addProdToSRes(product, id){
 }
 	function updateBubble(){
 			if (cartCount>0) {
-				$("#cartnumber").text(cartCount).show();
+				$("#cartnumber").text(cartCount).removeClass("hidden");
 			} else {
-				$("#cartnumber").hide();
+				$("#cartnumber").addClass("hidden");
 			}
 	}
 
@@ -679,7 +678,7 @@ function displayProducts() {
 	if(products.length == 0) {
 		//in case we had one form before...
 		$("#feedList").html("");
-		//$("#introContentNoproducts").show();
+		//$("#introContentNoproducts").removeClass("hidden");
 	} else {
 		$("#introContentNoFeeds").fadeOut("normal");
 
@@ -809,7 +808,7 @@ function displayProducts() {
 	if(products.length == 0) {
 		//in case we had one form before...
 		$("#feedList").html("");
-		$("#introContentNoproducts").show();
+		$("#introContentNoproducts").removeClass("hidden");
 	} else {
 		for(var i=0; i<products.length; i++) {
 
