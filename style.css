@@ -15,6 +15,9 @@
     text-align: center;
     padding-top: 50px;
 }
+#header{
+    background: rgba(233,233,233,0.9);
+}
 
 #logo{
     width: 80px;
@@ -292,16 +295,10 @@ margin-left: -40px;
     background: #fff;
 }
 
-
 #cartnumber{
-  display: none;
   background: #BA070F;
   color: #fff;
   padding: 1px 7px;
-  position: absolute;  
-  z-index: 999;
-  border-radius: .8em;
-  border: 2px solid #fff;
 }
 
 

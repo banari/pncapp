@@ -18,8 +18,8 @@
 		<a id="leftheader" href="" data-icon="carat-l"  data-rel="back">Vissza</a>
 		<h1><img src="img/logo.png" id="logo"></h1>
 		<a id="rightheader" href="#categorypage" class="ui-btn-right" data-transition="slideup" >Kategóriák</a>
-		
 	</div>
+	<div class="header-blur"></div>
 
 <div data-role="page" id="intropage">
 	
@@ -231,7 +231,7 @@
      <div data-role="navbar">
        <ul>
          <li><a id="homenavbtn" class="intro ui-btn-active ui-state-persist" href="#intropage" data-transition="none" data-icon="home" data-iconpos="top">Home</a></li>
-         <li><a id="cartnavbtn" class="cart" href="#cartpage" data-transition="none" data-icon="shop" data-iconpos="shop">Kosár <span id="cartnumber" class="ui-li-count">0</span></a></li>
+         <li><a id="cartnavbtn" class="cart" href="#cartpage" data-transition="none" data-icon="shop" data-iconpos="shop">Kosár <span id="cartnumber" class="ui-li-count ui-btn-up-b ui-btn-corner-all hidden">0</span></a></li>
          <li><a id="searchnavbtn" class="search" href="#searchpage" data-transition="none" data-icon="search" data-iconpos="top">Keresés</a></li>
        </ul>
      </div>
@@ -244,22 +244,28 @@
 <script type='application/javascript' src="js/idangerous.swiper.3dflow.min.js"></script>
 <script type='application/javascript' src="main.min.js"></script>	
 <script>
-window.addEventListener('load', function() {
-    FastClick.attach(document.body);
-}, false);
-$(document).on("pagecreate", "#intropage", function(e) {
-	init();	
-});
+	window.addEventListener('load', function() {
+	    FastClick.attach(document.body);
+	}, false);
+	function onDeviceReady() {
+	    if (parseFloat(window.device.version) >= 7.0) {
+	          document.body.style.marginTop = "20px";
+	          document.getElementById("header").style.marginTop = "20px";
+	    }
+	}
+	document.addEventListener('deviceready', onDeviceReady, false);
+	$(document).on("pagecreate", "#intropage", function(e) {
+		init();	
+	});
 </script>
 <script type="text/javascript">
 $(function(){
-			$( "[data-role='header'], [data-role='footer']" ).toolbar({ theme: "a" });
-
-$("#footer .ui-navbar a").on("click", function(){
-	var active = $(this);
-	$("#footer .ui-navbar a").removeClass("nav-btn-active");
-	active.addClass("nav-btn-active");
-});
+	$( "[data-role='header'], [data-role='footer']" ).toolbar({ theme: "a" });
+	$("#footer .ui-navbar a").on("click", function(){
+		var active = $(this);
+		$("#footer .ui-navbar a").removeClass("nav-btn-active");
+		active.addClass("nav-btn-active");
+	});
 		});
 </script>
 

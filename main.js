@@ -1,5 +1,9 @@
-var feedCache= {};
 
+
+//Selectors
+var $leftheader = $("#leftheader ");
+var $rightheader = $("#rightheader ");
+var $pagetitle = $("#header h1 ");
 //query all json 
 var products = [];
 
@@ -90,8 +94,8 @@ $(document).on("pagecontainershow", function () {
 
 
 	$(document).on("pagebeforeshow", "#productpage", function(e) {
-		$("#leftheader").removeClass("hidden");
-		$("#rightheader").addClass("hidden");
+		$leftheader.removeClass("hidden");
+		$rightheader.addClass("hidden");
 
 		selectedAttributes = [];
 		atrCount = 0;		
@@ -159,7 +163,7 @@ $(document).on("pagecontainershow", function () {
 			
 			commontxt += "<li><a  href='' id='addToCartBtn' data-role='button' data-product='"+prodId+"#"+theProd.id+"' >Kosárba</a></li>";
 
-		$("#header h1").html(theProd.title);
+		$pagetitle.html(theProd.title);
 		$("#detList").append(commontxt);
 		$("#detList").listview("refresh");
 		$(".myselectmenu").selectmenu();
@@ -186,9 +190,9 @@ $(document).on("pagecontainershow", function () {
 				s+= "<li><a href='product.html?id="+i+"' data-prodindex='"+i+"'><img src='"+ products[i].featured_src +"'><h2 class='ui-li-heading'>" +products[i].title+"</h2><p class='ui-li-desc'>"+displayPrice(products[i].price_html)+" </p></a></li>";				
 			};
 		}
-		$("#header h1").html(theCat);
-		$("#leftheader").removeClass("hidden");
-		$("#rightheader").addClass("hidden");
+		$pagetitle.html(theCat);
+		$leftheader.removeClass("hidden");
+		$rightheader.addClass("hidden");
 		$("#prodList").html(s);
 		$("#prodList").listview("refresh");
 	})
@@ -214,9 +218,9 @@ $(document).on("pagecontainershow", function () {
 			$("#inCartList").html("<li>A kosarad jelenleg üres!</li>");
 		}
 
-		$("#header h1").html("Kosár");
-		$("#leftheader").addClass("hidden");
-		$("#rightheader").addClass("hidden");
+		$pagetitle.html("Kosár");
+		$leftheader.addClass("hidden");
+		$rightheader.addClass("hidden");
 		$("#inCartList").listview("refresh");
 	})
 
@@ -305,9 +309,9 @@ $(document).on("pagecontainershow", function () {
 		for(var i=0; i<searchres.length; i++) {
 				s+= "<li><a href='product.html?id="+searchres[i]._id+"' data-prodindex='"+searchres[i]._id+"'><img src='"+ searchres[i]._product.featured_src +"'><h2 class='ui-li-heading'>" +searchres[i]._product.title+"</h2><p class='ui-li-desc'>"+displayPrice(searchres[i]._product.price_html)+" </p></a></li>";				
 		}
-		$("#header h1").html("Keresés eredménye");
-		$("#leftheader").removeClass("hidden");
-		$("#rightheader").addClass("hidden");
+		$pagetitle.html("Keresés eredménye");
+		$leftheader.removeClass("hidden");
+		$rightheader.addClass("hidden");
 		$("#searchreslist").html(s);
 		$("#searchreslist").listview("refresh");
 	})
@@ -338,23 +342,23 @@ $(document).on("pagecontainershow", function () {
 	});
 
 	$(document).on( "pagebeforeshow", "#categorypage", function( event) {
-		$("#leftheader").removeClass("hidden");
-		$("#rightheader").addClass("hidden");
-		$("#header h1").html("Kategóriák");
+		$leftheader.removeClass("hidden");
+		$rightheader.addClass("hidden");
+		$pagetitle.html("Kategóriák");
 
 	} );
 
 	$(document).on( "pagebeforeshow", "#orderpage", function( event) {
-		$("#leftheader").removeClass("hidden");
-		$("#rightheader").addClass("hidden");
-		$("#header h1").html("Rendelés");
+		$leftheader.removeClass("hidden");
+		$rightheader.addClass("hidden");
+		$pagetitle.html("Rendelés");
 
 	} );	
 
 	$(document).on( "pagebeforeshow", "#intropage", function( event) {
-			$("#leftheader").addClass("hidden");
-			$("#rightheader").removeClass("hidden");
-			$("#header h1").html("<img src='img/logo.png' id='logo'>");
+			$leftheader.addClass("hidden");
+			$rightheader.removeClass("hidden");
+			$pagetitle.html("<img src='img/logo.png' id='logo'>");
 	} );
 
     	$( "#search input, #search select" ).change(function() {
@@ -381,9 +385,9 @@ $(document).on("pagecontainershow", function () {
 			
 			
 			$("#search").listview("refresh");
-			$("#leftheader").addClass("hidden");
-			$("#rightheader").addClass("hidden");
-			$("#header h1").html("Keresés");
+			$leftheader.addClass("hidden");
+			$rightheader.addClass("hidden");
+			$pagetitle.html("Keresés");
 	} );
 
 	$(document).on("pageshow", "#intropage", function () { 
