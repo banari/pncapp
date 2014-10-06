@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Peaches And Cream Shop</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+<div data-role="page" id="productpage" >
+
+	<div data-role="header" data-add-back-btn="true" data-position="fixed" data-tap-toggle="false"> 
+		<h1 id="producttitle"></h1>
+	</div>
+	
+	<div data-role="content" id="prodcontents">
+		<ul id="detList" data-role="listview" data-inset="false" >
+			<li class="slidercontainer">
+				<div  id="imgslider" class="swiper-container ">
+					<div class="pagination"></div>
+					<div class="swiper-wrapper" style="width:2424px;">
+						<div class="swiper-slide">
+							<div class="inner">	
+								<img src="img/thumbs/1.jpg" height="150" width="150" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>  
+	</div>
+
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" data-id="footernav">
+     <div data-role="navbar">
+       <ul>
+         <li><a href="#intropage" class="ui-btn-active ui-state-persist" data-transition="none" data-icon="home" data-iconpos="top">Home</a></li>
+         <li><a href="#cartpage" data-transition="none" data-icon="search" data-iconpos="shop">Kosár <span id="cartnumber" class="ui-li-count">0</span></a></li>
+         <li><a href="#searchpage" data-transition="none" data-icon="search" data-iconpos="top">Keresés</a></li>
+       </ul>
+     </div>
+   	</div>
+		
+	<div data-role="popup" id="firstPopup" data-dismissible="false" class="ui-content">
+    	<p>A kosarad frissült!</p>
+    	<a href="" data-rel="back" data-role="button">Ok</a>
+	</div>
+</div>
+</body>
+</html>

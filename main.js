@@ -389,9 +389,13 @@ $(document).on("pagecontainershow", function () {
 
 	$(document).on("pageshow", "#intropage", function () { 
 		if (mySwiper){
-			mySwiper.reInit();	
-			}
+			mySwiper.reInit();				
+			mySwiper.resizeFix(true);
+		}
 	});
+	/*$(document).bind('swipeleft', function () {
+	    history.back();
+	});*/
 }
 	function calculateSearchResult(){
 		searchres = [];
@@ -542,6 +546,13 @@ function addProdToSRes(product, id){
 		}
 		//Set Width
 		$('#imgslider .swiper-slide').css('width', imgWidth);
+
+		 $('#imgslider').css({height:''})
+		  //Calc Height
+		 $('#imgslider').css({height: $('#imgslider ').find('img').height()})
+		  //ReInit Swiper
+		imgslider.resizeFix(true)	
+		imgslider.reInit();	
 	}
 
 /*
@@ -879,18 +890,11 @@ $(window).on('resize', function ()
 
 	$(window).resize(function(){
 		if (activePage == "productpage"){
-			changeSize()
-			imgslider.resizeFix(true)	
-			imgslider.reInit();			
-			  $('#imgslider').css({height:''})
-			  //Calc Height
-			  $('#imgslider').css({height: $('#imgslider ').find('img').height()})
-			  //ReInit Swiper
-			  imgslider.reInit()
+			changeSize();
 		}
 		if (activePage == "intropage"){
-			mySwiper.resizeFix(true)	
 			mySwiper.reInit();	
+			mySwiper.resizeFix(true);
 		}
 	});
 	/*$(window).resize(function(){

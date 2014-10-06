@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Peaches And Cream Shop</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" href="css/idangerous.swiper.css">
+<link rel="stylesheet" href="css/idangerous.swiper.3dflow.css">
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/appstore.css">
+<link rel="stylesheet" href="js/jquery.mobile-1.4.3.min.css" />
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="config.js"></script>
+<script src="js/jquery.mobile-1.4.3.min.js"></script>
+<script src="js/idangerous.swiper-2.0.min.js"></script>
+<script src="js/idangerous.swiper.3dflow-2.0.js"></script>
+<script src="js/appstore.js"></script>
+<script src="main.js"></script>	
+</head>
+
+<body>
+
+<div data-role="page" id="intropage">
+
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
+		<h1>Peaches and Cream</h1>
+		<a href="#categorypage" class="ui-btn-right" data-transition="slideup" >Categories</a>
+	</div>
+	
+	<div data-role="content" id="introContent">
+		<p id="introContentNoFeeds" style="display:none">
+			Welcome to the Shop.
+		</p>
+
+
+            <div id="mainslider" class="swiper-container featured plain">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"></div>
+                </div>
+            </div>
+		<div class="swiper-container banners-container border-gradient">
+			<div class="thumbs-title">Böngészés kategóriánként</div>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/1.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/2.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/3.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/4.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/5.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/6.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/7.jpg)"></div>
+				</div>
+			</div>
+		</div>
+		<div id="saleslider" class="swiper-container thumbs-cotnainer">
+			<div class="thumbs-title"></div>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="" height="150" width="150" alt="">
+					<div class="app-title"></div>
+					<div class="app-category"></div>
+					<div class="app-price"></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="newslider" class="swiper-container thumbs-cotnainer ">
+			<div class="thumbs-title"></div>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="" height="150" width="150" alt="">
+					<div class="app-title"></div>
+					<div class="app-category"></div>
+					<div class="app-price"></div>
+				</div>
+			</div>
+		</div>
+		<div class="swiper-container banners-container border-gradient">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/1.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/2.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/3.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/4.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/5.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/6.jpg)"></div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner" style="background-image:url(img/big/7.jpg)"></div>
+				</div>
+			</div>
+		</div>		
+		<div id="totalslider" class="swiper-container thumbs-cotnainer ">
+			<div class="thumbs-title"></div>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="" height="150" width="150" alt="">
+					<div class="app-title"></div>
+					<div class="app-category"></div>
+					<div class="app-price"></div>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+
+	<div data-role="footer" data-position="fixed" data-id="footernav" data-tap-toggle="false"> 
+     <div data-role="navbar">
+       <ul>
+         <li><a href="#intropage" class="ui-btn-active ui-state-persist" data-transition="none">Home</a></li>
+         <li><a href="#cartpage" data-transition="none">Kosár</a></li>
+         <li><a href="#searchpage" data-transition="none">Keresés</a></li>
+       </ul>
+     </div>
+   	</div>
+
+</div>
+
+<div data-role="page" id="cartpage">
+
+	<div data-role="header" data-position="fixed">
+		<h1>Kosár</h1>
+	</div>
+	
+	<div data-role="content">
+		<ul id="inCartList" data-role="listview" data-inset="false" >
+			<li>A kosarad jelenleg üres!</li>
+		</ul>
+	</div>
+
+	<div data-role="footer" data-position="fixed" data-id="footernav">
+     <div data-role="navbar">
+       <ul>
+         <li><a href="#intropage" data-transition="none">Home</a></li>
+         <li><a href="#cartpage" class="ui-btn-active ui-state-persist" data-transition="none">Kosár</a></li>
+         <li><a href="#searchpage" data-transition="none">Keresés</a></li>
+       </ul>
+     </div>
+   	</div>
+		
+</div>
+
+<div data-role="page" id="searchpage">
+
+	<div data-role="header" data-position="fixed">
+		<h1>Keresés</h1>
+	</div>
+	
+	<div data-role="content">
+		<ul id="search" data-role="listview" data-inset="false" ></ul>
+	</div>
+
+	<div data-role="footer" data-position="fixed" data-id="footernav">
+     <div data-role="navbar">
+       <ul>
+         <li><a href="#intropage" data-transition="none">Home</a></li>
+         <li><a href="#cartpage" data-transition="none">Kosár</a></li>
+         <li><a href="#searchpage" class="ui-btn-active ui-state-persist" data-transition="none">Keresés</a></li>
+       </ul>
+     </div>
+   	</div>
+		
+</div>
+
+<div data-role="page" id="categorypage" >
+
+	<div data-role="header" data-add-back-btn="true">
+		<h1>Categories</h1>
+	</div>
+	
+	<div data-role="content" id="categorycontent">
+		<ul id="catList" data-role="listview" data-inset="false" ></ul>
+	</div>
+
+	<div data-role="footer" data-position="fixed" data-id="footernav">
+     <div data-role="navbar">
+       <ul>
+         <li><a href="index.html#intropage" class="ui-btn-active ui-state-persist">Home</a></li>
+         <li><a href="index.html#cartpage">Kosár</a></li>
+         <li><a href="index.html#searchpage">Keresés</a></li>
+       </ul>
+     </div>
+   	</div>
+		
+</div>
+
+<script>
+$(document).on("pagecreate", "#intropage", function(e) {
+	init();	
+});
+</script>
+
+
+</body>
+</html>

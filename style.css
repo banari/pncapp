@@ -205,10 +205,10 @@ margin-left: -40px;
     position: relative;
     display: block;
 }
-
+/*
 #imgslider .swiper-wrapper {
     height: 100%;
-}
+}*/
 
 #imgslider .swiper-slide {
     text-align: center;
@@ -251,6 +251,7 @@ margin-left: -40px;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 .pagination {
     position: absolute;
     text-align: center;

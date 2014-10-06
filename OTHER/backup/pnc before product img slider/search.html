@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>RSS Reader App</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" href="js/jquery.mobile-1.4.3.min.css" />
+<link rel="stylesheet" href="css/idangerous.swiper.css">
+<link rel="stylesheet" href="css/idangerous.swiper.3dflow.css">
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/appstore.css">
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="config.js"></script>
+<script src="js/jquery.mobile-1.4.3.min.js"></script>
+<script src="js/idangerous.swiper-2.0.min.js"></script>
+<script src="js/idangerous.swiper.3dflow-2.0.js"></script>
+<script src="js/appstore.js"></script>
+<script src="main.js"></script>	
+</head>
+
+<body>
+
+ <div data-role="page" id="page2">
+        <div data-role="header">
+            	<h1>Page 2</h1>
+
+        </div>
+        <!-- /header -->
+        <div data-role="content">
+            <p>I'm first in the source order so I'm shown as the page.</p>
+            <p>View Slider on <a href="#page1">Page 1</a>
+
+            </p>
+        </div>
+        <!-- /content -->
+        <div data-role="footer">
+            	<h4>Page Footer</h4>
+
+        </div>
+        <!-- /footer -->
+    </div>
+    <!-- /page -->
+    <!-- Start of second page -->
+    <div data-role="page" id="page1">
+        <div data-role="header">
+            	<h1>Page 1</h1>
+
+        </div>
+        <!-- /header -->
+        <div data-role="content">
+            <div class="swiper-container featured plain">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"></div>
+                </div>
+            </div>
+            <p>I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is beeing clicked.</p>
+            <p><a href="#page2">Back to Page One</a>
+
+            </p>
+        </div>
+        <!-- /content -->
+        <div data-role="footer">
+            	<h4>Page Footer</h4>
+
+        </div>
+        <!-- /footer -->
+    </div>
+    <!-- /page -->
+<script type="text/javascript">
+init();
+
+</script>
+</body>
+</html>
