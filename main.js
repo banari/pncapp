@@ -4,6 +4,7 @@
 var $leftheader = $("#leftheader ");
 var $rightheader = $("#rightheader ");
 var $pagetitle = $("#header h1 ");
+var $footer = $("#footer");
 //query all json 
 var products = [];
 
@@ -23,7 +24,6 @@ var box = {}; // my object
 //search
 var searchres = [];
 
-var fprod = 0;
 var fcat = 0;
 
 var slider;
@@ -44,6 +44,9 @@ var saleProds = [];  // sale products
 var featProds = [];  // featured products
 var totProds = [];  // total sales products
 
+//Check if the device is android
+var isAndroid = navigator.userAgent.toLowerCase().indexOf('android')>=0;
+
 function init() {
 	//getProducts();
 
@@ -57,21 +60,30 @@ $(document).on("pagecontainershow", function () {
 
     var active = $.mobile.pageContainer.pagecontainer("getActivePage");
     activePage = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
+    var slidersettings = {};
     if (activePage == "intropage" && $(".featured", active).hasClass("plain")) {
-/*
-    	var isAndroid = navigator.userAgent.toLowerCase().indexOf('android')>=0;
-		if (isAndroid) Swiper.prototype.support.transforms3d = false;
-		*/
-        mySwiper = $(".featured", active).removeClass("plain").swiper({
-            slidesPerView: 'auto',
-            centeredSlides: true,
-            initialSlide: 1,
-            tdFlow: {
-                rotate: 30,
-                stretch: 10,
-                depth: 150
-            }
-        });
+
+		if (isAndroid){
+			Swiper.prototype.support.transforms3d = false;	
+			slidersettings ={
+	            slidesPerView: 'auto',
+	            centeredSlides: true,
+	            initialSlide: 1
+        	}
+		} else{
+			slidersettings = {
+	            slidesPerView: 'auto',
+	            centeredSlides: true,
+	            initialSlide: 1,
+	            tdFlow: {
+	                rotate: 30,
+	                stretch: 10,
+	                depth: 150
+	            }
+        	}
+		}
+		
+        mySwiper = $(".featured", active).removeClass("plain").swiper(slidersettings);
 
 		catswiper = $("#catswiper").swiper({
 			slidesPerView:'auto',
@@ -337,9 +349,6 @@ $(document).on("pagecontainershow", function () {
 		$("#inCartList").html("<li>A kosarad jelenleg üres!</li>");
 		$("#inCartList").listview("refresh");
 	});
-	$(document).on("click","#ordercart", function(){
-		//displayNofy();
-	});
 
 	$(document).on( "pagebeforeshow", "#categorypage", function( event) {
 		$leftheader.removeClass("hidden");
@@ -404,12 +413,12 @@ $(document).on("pagecontainershow", function () {
 	 */
 	$(document).on('focus', 'input, textarea, select', function() 
 	{
-		$("#footer").addClass("hidden");
+		$footer.addClass("hidden");
 	});
 
 	$(document).on('blur', 'input, textarea, select', function() 
 	{
-		$("#footer").removeClass("hidden");
+		$footer.removeClass("hidden");
 	});
 
 
@@ -610,7 +619,7 @@ function displayImages(imglist){
 }
 
 function getProducts() {
- 
+
 		var url = 'http://gate1.hu/pnc/json.php';
 	    $.ajax({
 	       type: 'GET',
@@ -622,12 +631,12 @@ function getProducts() {
 	       		console.log("succes! ");
 	       		products = json.products;
 	       		localStorage["products"] = JSON.stringify(products);
-	       		fprod = 1;
 	       		getCategories();
 	       		displayProducts();
 		    },
 		    error: function(e) {
 		       console.log("Hiba! Nincs internet vagy nem érhető el a szerver" + e.message);
+		       $("#introContentNoFeeds").html("Sorry, no connection with the server. In order to use the application you need Internet connection");
 		    }
 	    });
 	
@@ -728,10 +737,17 @@ function displayProducts() {
 //slide down effect, hidden slders
 function addNewFeaturedSlide(productid, slider){
 	var product = products[productid];
+	var slidershadow = "";
+	if (!isAndroid){
+		slidershadow += "<div class='swiper-slide-shadow-left'></div><div class='swiper-slide-shadow-right'></div>";
+	}
 	var newSlide = slider.createSlide("<div class='prodcard' style='background-image:url("+ product.featured_src +")'><a href='product.html?id="+productid+"' data-feed='"+productid+"'>"
 		+ "<span class='slititle'>" +product.title+"</span>"
 		+ "<span class='sliprice'>"+displayPrice(product.price_html)+"</span>"
-	+ "</a></div><div class='swiper-slide-shadow-left'></div><div class='swiper-slide-shadow-right'></div>");
+	+ "</a></div>" + slidershadow);
+
+
+
 	slider.appendSlide(newSlide);
 }
 
