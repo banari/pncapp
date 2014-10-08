@@ -4,7 +4,7 @@
 <title>Peaches And Cream Shop</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="style.min.css">
+<link rel="stylesheet" type="text/css" href="style.css">
 <link rel="stylesheet" href="js/idangerous.swiper.css">
 <link rel="stylesheet" href="js/idangerous.swiper.3dflow.css">
 <link rel="stylesheet" href="css/normalize.css">
@@ -12,7 +12,7 @@
 </head>
 
 <body>
-
+	<img src="img/loader.gif" id="loaderanimation">
 	<div id="header" data-role="header" data-position="fixed" data-tap-toggle="false">
 		<a id="leftheader" href="" data-icon="carat-l"  data-rel="back">Vissza</a>
 		<h1><img src="img/logo.png" id="logo"></h1>
@@ -205,7 +205,7 @@
 				</div>
 			</li>
 			<li data-role='list-divider'></li>
-<li><a href="#searchrespage" data-role="button" data-inline="true">Keresés <span id="resultcount"></span></a> </li>
+<li><a href="#searchrespage" id="searchresbtn" data-role="button" data-inline="true">Keresés <span id="resultcount"></span></a> </li>
 
 		</ul>
 		</form>
@@ -241,7 +241,7 @@
 <script type='application/javascript' src="js/jquery.mobile-1.4.3.min.js"></script>
 <script type='application/javascript' src="js/idangerous.swiper.min.js"></script>
 <script type='application/javascript' src="js/idangerous.swiper.3dflow.min.js"></script>
-<script type='application/javascript' src="main.min.js"></script>	
+<script type='application/javascript' src="main.js"></script>	
 <script>
 	window.addEventListener('load', function() {
 	    FastClick.attach(document.body);

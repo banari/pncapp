@@ -383,16 +383,10 @@ $(document).on("pagecontainershow", function () {
 		for(var i=0; i<categories.length; i++) {
 			searchcatlist+= "<option value='"+categories[i].Name+"'>"+categories[i].Name+"</option>";
 		}
-			$("#search #categories").html(searchcatlist);
-			$("#search #categories").selectmenu("refresh");
+			$("#search #categories").html(searchcatlist).selectmenu("refresh");
 
-			if (searchres.length>0){
-				$("#resultcount").text("("+searchres.length+")");
-			} else {
-				$("#resultcount").text("("+products.length+")");	
-			}
-			
-			
+			checkSearchRes();
+						
 			$("#search").listview("refresh");
 			$leftheader.addClass("hidden");
 			$rightheader.addClass("hidden");
@@ -445,9 +439,21 @@ $(document).on("pagecontainershow", function () {
 					addProdToSRes(products[i], i);
 				}
 			} // products for
-			$("#resultcount").text("("+searchres.length+")");
+			checkSearchRes();
 			$("#search").listview("refresh");
 	}
+
+	function checkSearchRes(){
+		console.log("Sres: " + searchres.length);
+			if (searchres.length>0){
+				$("#resultcount").text("("+searchres.length+")");
+				$("#searchresbtn").prop( "disabled", false ).toggleClass( "ui-state-disabled", false ).addClass("btnok");	
+			} else {
+				$("#resultcount").text("(0)");	
+				$("#searchresbtn").prop( "disabled", true ).toggleClass( "ui-state-disabled btnok", true ).removeClass("btnok");
+			}
+	}
+
 	function checkInCat(product, cats){
 		if (cats.length>0){
 			for (var j = 0; j<product.categories.length; ++j){
@@ -545,13 +551,10 @@ function addProdToSRes(product, id){
 
 		var atcbtn = $( "#addToCartBtn" );
 		if (atrCount != selectedAttributes.length){
-			//console.log(" - NO");
 			if (!atcbtn.prop("disabled"))
-				atcbtn.prop( "disabled", true ).toggleClass( "ui-state-disabled", true );
+				atcbtn.prop( "disabled", true ).toggleClass( "ui-state-disabled", true ).removeClass("btnok");
 		} else {
-			//console.log(" - YES");
-			//It is okey
-			atcbtn.prop( "disabled", false ).toggleClass( "ui-state-disabled", false );
+			atcbtn.prop( "disabled", false ).toggleClass( "ui-state-disabled", false ).addClass("btnok");
 			
 			var product = atcbtn.data("product");
 			product += "#" + selectedAttributes.join("#");

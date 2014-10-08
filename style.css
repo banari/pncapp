@@ -313,3 +313,14 @@ html.ui-mobile div.noty{
    color: #fff;
    text-shadow: 0 1px 0 #000000;
 }
+
+ul li a.btnok{
+    background-color: #B8E7BA !important;
+}
+
+#loaderanimation{
+position: absolute;
+top: 50px;
+left: 50%;
+margin-left: -16px;
+}
