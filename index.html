@@ -4,7 +4,7 @@
 <title>Peaches And Cream Shop</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style.min.css">
 <link rel="stylesheet" href="js/idangerous.swiper.css">
 <link rel="stylesheet" href="js/idangerous.swiper.3dflow.css">
 <link rel="stylesheet" href="css/normalize.css">
@@ -158,8 +158,9 @@
 			</li>												
 			<li data-role='list-divider'>Fizetési adatok</li>
 			<li>
-<label for="paymethod" class="select">Fizetés módja:</label>
-<select name="paymethod" id="paymethod">
+<label for="paymethod" class="select">Fizetés:</label>
+<select name="paymethod" id="paymethod" data-mini="true" data-mini="true" >
+    <option value="" disabled selected>Válasszon fizetési módot</option>
     <option value="banktransfer">Bank Transfer</option>
     <option value="paypal">PayPal</option>
     <option value="cashondelivery">Cash on delivery</option>
@@ -192,7 +193,7 @@
 			</li>
 			<li class="ui-field-contain">
 				<label for="categories">Kategória:</label>
-				<select multiple="multiple" data-native-menu="false" name="categories" id="categories">
+				<select multiple="multiple" data-native-menu="false" name="categories" id="categories" data-mini="true">
 				    
 				</select>				
 			</li>
@@ -241,7 +242,7 @@
 <script type='application/javascript' src="js/jquery.mobile-1.4.3.min.js"></script>
 <script type='application/javascript' src="js/idangerous.swiper.min.js"></script>
 <script type='application/javascript' src="js/idangerous.swiper.3dflow.min.js"></script>
-<script type='application/javascript' src="main.js"></script>	
+<script type='application/javascript' src="main.min.js"></script>	
 <script>
 	window.addEventListener('load', function() {
 	    FastClick.attach(document.body);

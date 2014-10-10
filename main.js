@@ -5,6 +5,7 @@ var $leftheader = $("#leftheader ");
 var $rightheader = $("#rightheader ");
 var $pagetitle = $("#header h1 ");
 var $footer = $("#footer");
+var $header = $("#header");
 //query all json 
 var products = [];
 
@@ -149,8 +150,8 @@ $(document).on("pagecontainershow", function () {
 
 				commontxt += "<li><div class='ui-field-contain'>";
 				commontxt += "<label for='"+theProd.attributes[i].name+"' > "+theProd.attributes[i].name+" </label>";
-				commontxt += "<select name='"+theProd.attributes[i].name+"' id='"+theProd.attributes[i].name+"' data-index='"+i+"' class='myselectmenu'>";
-				commontxt += "<option value='' disabled selected> - </option>";
+				commontxt += "<select data-mini='true' name='"+theProd.attributes[i].name+"' id='"+theProd.attributes[i].name+"' data-index='"+i+"' class='myselectmenu'>";
+				commontxt += "<option value='' disabled selected> "+theProd.attributes[i].name+" </option>";
 					for(var j = 0; j < theProd.attributes[i].options.length; ++j){
 						commontxt += "<option value='"+theProd.attributes[i].options[j]+"'>"+theProd.attributes[i].options[j]+" </option>";
 					}
@@ -161,9 +162,9 @@ $(document).on("pagecontainershow", function () {
 			
 		}
 				commontxt += "<li><div class='ui-field-contain'>";
-				commontxt += "<label for='darab' > Darabszám </label>";
-				commontxt += "<select name='darab' id='darab' data-index='"+(atrCount-1)+"' class='myselectmenu'>";
-					commontxt += "<option value='' disabled selected> - </option>";
+				commontxt += "<label for='darab' > Darab </label>";
+				commontxt += "<select data-mini='true' name='darab' id='darab' data-index='"+(atrCount-1)+"' class='myselectmenu'>";
+					commontxt += "<option value='' disabled selected> Darab </option>";
 					for(var i = 1; i <= 20; ++i){
 						commontxt += "<option value='qty"+i+"'>"+i+" </option>";
 					}
@@ -408,11 +409,15 @@ $(document).on("pagecontainershow", function () {
 	$(document).on('focus', 'input, textarea, select', function() 
 	{
 		$footer.addClass("hidden");
+		$header.addClass("hidden");
+
 	});
 
 	$(document).on('blur', 'input, textarea, select', function() 
 	{
 		$footer.removeClass("hidden");
+		$header.removeClass("hidden");
+
 	});
 
 
